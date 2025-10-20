@@ -1,0 +1,16 @@
+{
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:sheets/wrought_iron"
+  },
+  "result": {
+    "id": "tfc_hammer_time:metal/excavator_head/wrought_iron"
+  },
+  "tier": 3,
+  "rules": [
+    "bend_last",
+    "upset_second_last",
+    "draw_third_last"
+  ],
+  "apply_forging_bonus": true
+}

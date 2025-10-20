@@ -1,0 +1,16 @@
+{
+  "type": "tfc:anvil",
+  "ingredient": {
+    "tag": "c:double_ingots/bronze"
+  },
+  "result": {
+    "id": "tfc_hammer_time:metal/sledgehammer_head/bronze"
+  },
+  "tier": 2,
+  "rules": [
+    "bend_last",
+    "upset_second_last",
+    "draw_third_last"
+  ],
+  "apply_forging_bonus": true
+}

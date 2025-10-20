@@ -16,20 +16,22 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.level.BlockEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 public class SledgeItem extends ToolItem implements CreativeMiningTool {
 
     private final TagKey<Block> blocks;
+    private final Tier tier;
 
     public SledgeItem(Tier tier, float attackDamage, float attackSpeed, TagKey<Block> mineableBlocks, Item.Properties properties) {
-        super(tier, attackDamage, attackSpeed, mineableBlocks, properties);
+        super(tier, mineableBlocks, properties);
         this.blocks = mineableBlocks;
+        this.tier = tier;
     }
 
     public float getDestroySpeed(ItemStack pStack, BlockState pState) {
-        return pState.is(this.blocks) ? (this.speed * 0.4f) : 1.0F;
+        return pState.is(this.blocks) ? (tier.getSpeed()* 0.4f) : 1.0F;
     }
 
     public void mineBlockInCreative(ItemStack stack, Level level, BlockState state, BlockPos pos, Player player) {
@@ -44,9 +46,7 @@ public class SledgeItem extends ToolItem implements CreativeMiningTool {
     private void dropResourcesAndBreak(BlockState state, BlockPos pos, Player player, ItemStack stack, Level level) {
         if (!player.isCreative()) {
             Block.dropResources(state, level, pos, state.hasBlockEntity() ? level.getBlockEntity(pos) : null, player, player.getMainHandItem());
-            stack.hurtAndBreak(1, player, (p) -> {
-                p.broadcastBreakEvent(player.getUsedItemHand());
-            });
+            stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
         }
     }
 
@@ -86,7 +86,7 @@ public class SledgeItem extends ToolItem implements CreativeMiningTool {
                 if (!pos.equals(origin)) {
                     if (this.isCorrectToolForDrops(stack, stateAt) && this.isCorrectToolForDrops(stack, originBlock)) {
                         BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(level, pos, stateAt, player);
-                        if (!MinecraftForge.EVENT_BUS.post(event)) {
+                        if (!NeoForge.EVENT_BUS.post(event).isCanceled()) {
                             if (stateAt.hasProperty(BlockStateProperties.LAYERS)) {
                                 int layers = stateAt.getValue(BlockStateProperties.LAYERS);
                                 if (layers > 1) {
