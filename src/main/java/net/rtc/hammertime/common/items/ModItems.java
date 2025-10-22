@@ -3,21 +3,16 @@ package net.rtc.hammertime.common.items;
 
 import net.dries007.tfc.common.TFCTags;
 import net.dries007.tfc.common.items.MoldItem;
-import net.dries007.tfc.common.items.TFCItems;
-import net.dries007.tfc.common.items.ToolItem;
 import net.dries007.tfc.util.Helpers;
 import net.dries007.tfc.util.Metal;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.DiggerItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.rtc.hammertime.HammerTime;
 
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(HammerTime.MOD_ID);
@@ -50,9 +45,9 @@ public class ModItems {
             )
     );
 
-    public static final DeferredHolder<Item, Item> SLEDGEHAMMER_HEAD_MOLD = ITEMS.register("ceramic/sledgehammer_head_mold", () -> new MoldItem(() -> 100, TFCTags.Fluids.USABLE_IN_TOOL_HEAD_MOLD,  new Item.Properties()));
-
-    public static final DeferredHolder<Item, Item> EXCAVATOR_HEAD_MOLD = ITEMS.register("ceramic/excavator_head_mold", () -> new MoldItem(() -> 100, TFCTags.Fluids.USABLE_IN_TOOL_HEAD_MOLD,  new Item.Properties()));
+    public static final DeferredHolder<Item, MoldItem> SLEDGEHAMMER_HEAD_MOLD = ITEMS.register("ceramic/sledgehammer_head_mold", () -> new MoldItem(() -> 200, TFCTags.Fluids.USABLE_IN_TOOL_HEAD_MOLD,  new Item.Properties()));
+    // () -> new MoldItem(TFCConfig.SERVER.moldBellCapacity, TFCTags.Fluids.USABLE_IN_BELL_MOLD, new Properties()));
+    public static final DeferredHolder<Item, MoldItem> EXCAVATOR_HEAD_MOLD = ITEMS.register("ceramic/excavator_head_mold", () -> new MoldItem(() -> 200, TFCTags.Fluids.USABLE_IN_TOOL_HEAD_MOLD,  new Item.Properties()));
 
     public static final DeferredHolder<Item, Item> UNFIRED_SLEDGEHAMMER_HEAD_MOLD = ITEMS.register("ceramic/unfired_sledgehammer_head_mold", () -> new Item(new Item.Properties()));
 

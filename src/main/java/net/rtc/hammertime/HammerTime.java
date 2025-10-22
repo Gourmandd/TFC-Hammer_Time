@@ -6,12 +6,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.rtc.hammertime.common.items.ModItemCapabilities;
 import net.rtc.hammertime.common.items.ModItems;
 import org.slf4j.Logger;
 
@@ -22,13 +22,14 @@ public class HammerTime
     // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "tfc_hammer_time";
     // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public HammerTime(IEventBus modEventBus, ModContainer modContainer)
     {
 
         ModItems.register(modEventBus);
 
+        modEventBus.addListener(ModItemCapabilities::register);
         modEventBus.addListener(this::commonSetup);
 
 
