@@ -12,5 +12,5 @@
     "upset_second_last",
     "draw_third_last"
   ],
-  "apply_forging_bonus": true
+  "apply_bonus": true
 }
