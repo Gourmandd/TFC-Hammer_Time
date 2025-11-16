@@ -50,6 +50,16 @@ public class SledgeItem extends ToolItem implements CreativeMiningTool {
         }
     }
 
+    private void breakLayeredBlock(BlockState state, BlockPos pos, Level level, Player player, ItemStack stack){
+        int layers = state.getValue(BlockStateProperties.LAYERS);
+        if (layers > 1) {
+            level.setBlock(pos, state.setValue(BlockStateProperties.LAYERS, layers - 1), 3);
+        } else {
+            level.destroyBlock(pos, false, player);
+        }
+        dropResourcesAndBreak(state, pos, player, stack, level);
+    }
+
     private void doSledgeMining(ItemStack stack, Level level, BlockState state, BlockPos origin, LivingEntity entity) {
         if (entity instanceof ServerPlayer player) {
 
@@ -81,6 +91,7 @@ public class SledgeItem extends ToolItem implements CreativeMiningTool {
             // Adjust the 3x3x1 area based on the face the player is mining
 
             BlockState originBlock = level.getBlockState(origin);
+
             for (BlockPos pos : BlockPos.betweenClosed(startPos, endPos)) {
                 BlockState stateAt = level.getBlockState(pos);
                 if (!pos.equals(origin)) {
@@ -88,13 +99,7 @@ public class SledgeItem extends ToolItem implements CreativeMiningTool {
                         BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(level, pos, stateAt, player);
                         if (!NeoForge.EVENT_BUS.post(event).isCanceled()) {
                             if (stateAt.hasProperty(BlockStateProperties.LAYERS)) {
-                                int layers = stateAt.getValue(BlockStateProperties.LAYERS);
-                                if (layers > 1) {
-                                    level.setBlock(pos, stateAt.setValue(BlockStateProperties.LAYERS, layers - 1), 3);
-                                } else {
-                                    level.destroyBlock(pos, false, player);
-                                }
-                                dropResourcesAndBreak(stateAt, pos, player, stack, level);
+                                breakLayeredBlock(stateAt, pos, level, player, stack);
                             } else {
                                 dropResourcesAndBreak(stateAt, pos, player, stack, level);
                                 level.destroyBlock(pos, false, player);
