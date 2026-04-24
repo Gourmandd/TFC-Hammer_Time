@@ -135,7 +135,7 @@ dependencies {
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation "blank:coolmod-${mc_version}:${coolmod_version}"
 
-    implementation "curse.maven:terrafirmacraft-302973:7101304"
+    implementation "curse.maven:terrafirmacraft-302973:7875771"
 
     compileOnly "vazkii.patchouli:Patchouli:1.21.1-92-NEOFORGE:api"
     runtimeOnly "vazkii.patchouli:Patchouli:1.21.1-92-NEOFORGE"

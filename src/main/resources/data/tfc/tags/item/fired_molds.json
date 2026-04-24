@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "tfc_hammer_time:ceramic/fired_sledgehammer_head_mold",
-    "tfc_hammer_time:ceramic/fired_excavator_head_mold"
+    "tfc_hammer_time:ceramic/sledgehammer_head_mold",
+    "tfc_hammer_time:ceramic/excavator_head_mold"
   ]
 }
