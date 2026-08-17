@@ -12,7 +12,7 @@ import net.rtc.hammertime.common.items.SledgeItem;
 
 public class ModCreativeModeTab {
     public static void AddCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == TFCCreativeTabs.METAL.tab().getKey()) {
+        if (event.getTabKey() == TFCCreativeTabs.TFC_TOOLS_UTILITIES.tab().getKey()) {
             for (Metal metal : Metal.values()) {
                 DeferredHolder<Item, SledgeItem> sledgehammer = ModItems.SLEDGEHAMMERS.get(metal);
                 DeferredHolder<Item, SledgeItem> excavator = ModItems.EXCAVATORS.get(metal);
@@ -26,7 +26,7 @@ public class ModCreativeModeTab {
                 }
             }
         }
-        if (event.getTabKey() == TFCCreativeTabs.MISC.tab().getKey()){
+        if (event.getTabKey() == TFCCreativeTabs.TFC_METALS_INGREDIENTS.tab().getKey()){
             event.accept(ModItems.UNFIRED_EXCAVATOR_HEAD_MOLD.get());
             event.accept(ModItems.EXCAVATOR_HEAD_MOLD.get());
             event.accept(ModItems.UNFIRED_SLEDGEHAMMER_HEAD_MOLD.get());
